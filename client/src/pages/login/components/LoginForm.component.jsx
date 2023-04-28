@@ -23,8 +23,7 @@ export default function LoginForm() {
     initialValues,
     validationSchema: loginValidationSchema,
     onSubmit: (values) => {
-      //   alert(JSON.stringify(values, null, 2));
-      handleLogin();
+      handleLogin(values);
       navigate("/");
     },
   });

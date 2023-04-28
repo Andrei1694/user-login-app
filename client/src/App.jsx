@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 function App() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, handleLogin } = useContext(UserContext);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   useEffect(() => {
     const checkUser = async () => {
@@ -19,7 +19,7 @@ function App() {
           // const user = await axios.get("/api/user", {
           //   headers: { Authorization: `Bearer ${cookies.token}` },
           // });
-          if (user) setUser(user);
+          // if (user) setUser(user);
         } catch (error) {
           console.log(error);
         }

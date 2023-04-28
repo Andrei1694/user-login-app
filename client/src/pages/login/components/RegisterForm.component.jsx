@@ -3,15 +3,20 @@ import * as yup from "yup";
 import Input from "../../../components/Input";
 import { FormContainer } from "../../../components/FormContainer";
 import Button from "../../../components/Button";
+import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 
 const initialValues = {
   email: "",
+  name: "",
   password: "",
   confirmPassword: "",
 };
 
 const registerValidationSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
+  name: yup.string().min(5).required("Name is required"),
   password: yup.string().required("Password is required"),
   confirmPassword: yup
     .string()
@@ -20,11 +25,20 @@ const registerValidationSchema = yup.object().shape({
 });
 
 export default function RegisterForm() {
+  const { handleRegister } = useContext(UserContext);
   const formik = useFormik({
     initialValues,
     validationSchema: registerValidationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      console.log("wwow");
+
+      try {
+        console.log("Submitting form...");
+        handleRegister(values);
+        console.log("Form submitted successfully!");
+      } catch (error) {
+        console.log("Error submitting form:", error);
+      }
     },
   });
 
@@ -44,7 +58,18 @@ export default function RegisterForm() {
         {formik.touched.email && formik.errors.email && (
           <span>{formik.errors.email}</span>
         )}
-
+        <Input
+          label="Name"
+          type="text"
+          name="name"
+          id="name"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.name}
+        />
+        {formik.touched.name && formik.errors.name && (
+          <span>{formik.errors.name}</span>
+        )}
         <Input
           label="Password"
           type="password"

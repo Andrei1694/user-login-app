@@ -7,13 +7,19 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const handleRegister = async (values) => {
+    const { email, password, name } = values;
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/register", values);
-      setUser(response.data.user);
+      const response = await axios.post("http://localhost:3000/users", {
+        email,
+        password,
+        name,
+      });
+      console.log(response);
+      setUser({ user: response.data.user, token: response.data.token });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -22,14 +28,18 @@ const UserProvider = ({ children }) => {
   };
 
   const handleLogin = async (values) => {
+    const { email, password } = values;
     setIsLoading(true);
     try {
-      //   const response = await axios.post("/api/login", values);
-      //   setUser(response.data.user);
-      setUser({
-        name: "Stanciu",
+      const response = await axios.post("http://localhost:3000/users/login", {
+        email,
+        password,
       });
-      setCookie("token", { Ceva: 2 });
+      setUser({ user: response.data.user, token: response.data.token });
+      setCookie("user", {
+        user: response.data.user,
+        token: response.data.token,
+      });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
