@@ -8,6 +8,7 @@ import ProtectedLayout from "./pages/ProtectedLayout";
 import WeatherPage from "./pages/weather/Weather.page";
 import { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { getMyProfileRequest } from "./requests";
 
 function App() {
   const { user, setUser, handleLogin } = useContext(UserContext);
@@ -16,10 +17,8 @@ function App() {
     const checkUser = async () => {
       if (cookies.token) {
         try {
-          // const user = await axios.get("/api/user", {
-          //   headers: { Authorization: `Bearer ${cookies.token}` },
-          // });
-          // if (user) setUser(user);
+          const user = await getMyProfileRequest(cookies.token);
+          if (user) setUser(user);
         } catch (error) {
           console.log(error);
         }

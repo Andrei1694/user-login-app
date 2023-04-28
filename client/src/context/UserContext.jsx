@@ -1,13 +1,14 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { loginRequest } from "../requests";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const handleRegister = async (values) => {
     const { email, password, name } = values;
@@ -31,15 +32,9 @@ const UserProvider = ({ children }) => {
     const { email, password } = values;
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/users/login", {
-        email,
-        password,
-      });
-      setUser({ user: response.data.user, token: response.data.token });
-      setCookie("user", {
-        user: response.data.user,
-        token: response.data.token,
-      });
+      const { user, token } = await loginRequest(email, password);
+      setUser(user);
+      setCookie("token", token);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
