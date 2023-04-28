@@ -17,7 +17,7 @@ const loginValidationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ children }) {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
@@ -59,6 +59,7 @@ export default function LoginForm() {
 
           <Button type="submit">Login</Button>
         </form>
+        {children}
       </div>
     </FormContainer>
   );

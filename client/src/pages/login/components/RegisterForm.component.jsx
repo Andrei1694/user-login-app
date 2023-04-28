@@ -24,7 +24,7 @@ const registerValidationSchema = yup.object().shape({
     .required("Confirm Password is required"),
 });
 
-export default function RegisterForm() {
+export default function RegisterForm({ children }) {
   const { handleRegister } = useContext(UserContext);
   const formik = useFormik({
     initialValues,
@@ -98,6 +98,7 @@ export default function RegisterForm() {
 
         <Button type="submit">Register</Button>
       </form>
+      {children}
     </FormContainer>
   );
 }

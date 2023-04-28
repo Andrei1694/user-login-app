@@ -1,6 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import styled from "styled-components";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 
 const NavLink = styled(Link)`
   color: #fff;
@@ -11,13 +13,14 @@ const NavLink = styled(Link)`
     text-decoration: underline;
   }
 `;
-export default function Layout() {
+export default function Layout({ requireAuth = false }) {
+  const { user, handleLogout } = useContext(UserContext);
+  if (requireAuth && !user) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
-      <Navbar>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/login">Login</NavLink>
-      </Navbar>
+      <Navbar />
       <Outlet />
     </>
   );

@@ -4,7 +4,6 @@ import LoginPage from "./pages/login/Login.page";
 import HomePage from "./pages/Home";
 import Layout from "./pages/Layout";
 import { UserContext } from "./context/UserContext";
-import ProtectedLayout from "./pages/ProtectedLayout";
 import WeatherPage from "./pages/weather/Weather.page";
 import { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -25,22 +24,15 @@ function App() {
       }
     };
     checkUser();
-  }, []);
+  }, [cookies.token]);
   function renderRoutes() {
-    if (!user) {
-      return (
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-          </Route>
-        </Routes>
-      );
-    }
     return (
       <Routes>
-        <Route element={<ProtectedLayout />}>
+        <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+        <Route element={<Layout requireAuth />}>
           <Route path="/weather" element={<WeatherPage />} />
         </Route>
       </Routes>
