@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const handleRegister = async (values) => {
     const { email, password, name } = values;
@@ -44,6 +44,7 @@ const UserProvider = ({ children }) => {
 
   const handleLogout = () => {
     setUser(null);
+    removeCookie("token");
   };
 
   return (

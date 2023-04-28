@@ -12,7 +12,7 @@ import { getMyProfileRequest } from "./requests";
 
 function App() {
   const { user, setUser, handleLogin } = useContext(UserContext);
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies] = useCookies(["token"]);
   useEffect(() => {
     const checkUser = async () => {
       if (cookies.token) {
