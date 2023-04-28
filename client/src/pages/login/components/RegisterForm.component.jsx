@@ -30,14 +30,10 @@ export default function RegisterForm({ children }) {
     initialValues,
     validationSchema: registerValidationSchema,
     onSubmit: async (values) => {
-      console.log("wwow");
-
       try {
-        console.log("Submitting form...");
         handleRegister(values);
-        console.log("Form submitted successfully!");
       } catch (error) {
-        console.log("Error submitting form:", error);
+        console.log(error);
       }
     },
   });

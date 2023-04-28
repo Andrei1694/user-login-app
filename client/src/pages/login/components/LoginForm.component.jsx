@@ -24,7 +24,6 @@ export default function LoginForm({ children }) {
     validationSchema: loginValidationSchema,
     onSubmit: (values) => {
       handleLogin(values);
-      navigate("/");
     },
   });
   const { handleLogin } = useContext(UserContext);

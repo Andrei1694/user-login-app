@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { loginRequest } from "../requests";
+import { loginRequest, registerUser } from "../requests";
+import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
@@ -9,19 +10,16 @@ const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-
+  const navigate = useNavigate();
   const handleRegister = async (values) => {
     const { email, password, name } = values;
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/users", {
-        email,
-        password,
-        name,
-      });
-      console.log(response);
-      setUser({ user: response.data.user, token: response.data.token });
+      const { user, token } = await registerUser(email, password, name);
+      setUser({ user, token });
+      setCookie("token", token);
       setIsLoading(false);
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError(error.response.data.message);
@@ -36,6 +34,7 @@ const UserProvider = ({ children }) => {
       setUser(user);
       setCookie("token", token);
       setIsLoading(false);
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       setError(error.response.data.message);
