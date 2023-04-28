@@ -1,12 +1,13 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-
+import { useCookies } from "react-cookie";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const handleRegister = async (values) => {
     setIsLoading(true);
@@ -28,7 +29,7 @@ const UserProvider = ({ children }) => {
       setUser({
         name: "Stanciu",
       });
-      console.log(user);
+      setCookie("token", { Ceva: 2 });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -44,6 +45,7 @@ const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
+        setUser,
         isLoading,
         error,
         handleRegister,
