@@ -2,7 +2,10 @@ import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
 import { UserContext } from "../../../context/UserContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Input from "../../../components/Input";
+import { FormContainer } from "../../../components/FormContainer";
+import Button from "../../../components/Button";
 
 const initialValues = {
   email: "",
@@ -14,25 +17,23 @@ const loginValidationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ children }) {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     validationSchema: loginValidationSchema,
     onSubmit: (values) => {
-      //   alert(JSON.stringify(values, null, 2));
-      handleLogin();
+      handleLogin(values);
       navigate("/");
     },
   });
   const { handleLogin } = useContext(UserContext);
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
+    <FormContainer>
+      <h5>Login</h5>
+      <div>
+        <form onSubmit={formik.handleSubmit}>
+          <Input
             type="email"
             name="email"
             id="email"
@@ -43,10 +44,8 @@ export default function LoginForm() {
           {formik.touched.email && formik.errors.email && (
             <span>{formik.errors.email}</span>
           )}
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
+
+          <Input
             type="password"
             name="password"
             id="password"
@@ -57,9 +56,11 @@ export default function LoginForm() {
           {formik.touched.password && formik.errors.password && (
             <span>{formik.errors.password}</span>
           )}
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+
+          <Button type="submit">Login</Button>
+        </form>
+        {children}
+      </div>
+    </FormContainer>
   );
 }

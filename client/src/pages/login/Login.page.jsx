@@ -8,16 +8,23 @@ export default function LoginPage() {
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
-
-  return (
-    <div>
-      {showLogin ? <LoginForm /> : <RegisterForm />}
+  const renderMessage = () => {
+    return (
       <p>
         {showLogin ? "Don't have an account?" : "Already have an account?"}{" "}
         <a href="#" onClick={toggleForm}>
           {showLogin ? "Register" : "Login"}
         </a>
       </p>
+    );
+  };
+  return (
+    <div>
+      {showLogin ? (
+        <LoginForm>{renderMessage()}</LoginForm>
+      ) : (
+        <RegisterForm>{renderMessage()}</RegisterForm>
+      )}
     </div>
   );
 }
