@@ -3,7 +3,6 @@ import * as yup from "yup";
 import Input from "../../../components/Input";
 import { FormContainer } from "../../../components/FormContainer";
 import Button from "../../../components/Button";
-import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 

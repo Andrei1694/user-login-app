@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import axios from "axios";
+
 import { useCookies } from "react-cookie";
 import { loginRequest, registerUser } from "../requests";
 import { useNavigate } from "react-router-dom";

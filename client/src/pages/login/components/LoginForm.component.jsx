@@ -18,7 +18,6 @@ const loginValidationSchema = yup.object().shape({
 });
 
 export default function LoginForm({ children }) {
-  const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     validationSchema: loginValidationSchema,
