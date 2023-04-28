@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Input from "../../../components/Input";
-import styled from "styled-components";
+import { FormContainer } from "../../../components/FormContainer";
+import Button from "../../../components/Button";
 
 const initialValues = {
   email: "",
@@ -18,16 +19,6 @@ const registerValidationSchema = yup.object().shape({
     .required("Confirm Password is required"),
 });
 
-const FormContainer = styled.div`
-  max-width: 500px;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
-
 export default function RegisterForm() {
   const formik = useFormik({
     initialValues,
@@ -41,49 +32,46 @@ export default function RegisterForm() {
     <FormContainer>
       <h5>Register</h5>
       <form onSubmit={formik.handleSubmit}>
-        <div>
-          <Input
-            label="Email"
-            type="email"
-            name="email"
-            id="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          {formik.touched.email && formik.errors.email && (
-            <span>{formik.errors.email}</span>
-          )}
-        </div>
-        <div>
-          <Input
-            label="Password"
-            type="password"
-            name="password"
-            id="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-          />
-          {formik.touched.password && formik.errors.password && (
-            <span>{formik.errors.password}</span>
-          )}
-        </div>
-        <div>
-          <Input
-            label="Comfirm Password"
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.confirmPassword}
-          />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-            <span>{formik.errors.confirmPassword}</span>
-          )}
-        </div>
-        <button type="submit">Register</button>
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          id="email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <span>{formik.errors.email}</span>
+        )}
+
+        <Input
+          label="Password"
+          type="password"
+          name="password"
+          id="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+        />
+        {formik.touched.password && formik.errors.password && (
+          <span>{formik.errors.password}</span>
+        )}
+
+        <Input
+          label="Comfirm Password"
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.confirmPassword}
+        />
+        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+          <span>{formik.errors.confirmPassword}</span>
+        )}
+
+        <Button type="submit">Register</Button>
       </form>
     </FormContainer>
   );

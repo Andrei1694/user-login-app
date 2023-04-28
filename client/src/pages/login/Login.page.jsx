@@ -14,9 +14,7 @@ export default function LoginPage() {
       {showLogin ? <LoginForm /> : <RegisterForm />}
       <p>
         {showLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-        <a href="#" onClick={toggleForm}>
-          {showLogin ? "Register" : "Login"}
-        </a>
+        <a onClick={toggleForm}>{showLogin ? "Register" : "Login"}</a>
       </p>
     </div>
   );

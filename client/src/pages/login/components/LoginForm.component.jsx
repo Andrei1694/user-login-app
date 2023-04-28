@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
 import { UserContext } from "../../../context/UserContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Input from "../../../components/Input";
+import { FormContainer } from "../../../components/FormContainer";
+import Button from "../../../components/Button";
 
 const initialValues = {
   email: "",
@@ -28,7 +30,7 @@ export default function LoginForm() {
   });
   const { handleLogin } = useContext(UserContext);
   return (
-    <div>
+    <FormContainer>
       <h5>Login</h5>
       <div>
         <form onSubmit={formik.handleSubmit}>
@@ -56,9 +58,9 @@ export default function LoginForm() {
             <span>{formik.errors.password}</span>
           )}
 
-          <button type="submit">Login</button>
+          <Button type="submit">Login</Button>
         </form>
       </div>
-    </div>
+    </FormContainer>
   );
 }
