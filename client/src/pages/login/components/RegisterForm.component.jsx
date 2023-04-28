@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Input from "../../../components/Input";
+import styled from "styled-components";
 
 const initialValues = {
   email: "",
@@ -16,6 +18,16 @@ const registerValidationSchema = yup.object().shape({
     .required("Confirm Password is required"),
 });
 
+const FormContainer = styled.div`
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
 export default function RegisterForm() {
   const formik = useFormik({
     initialValues,
@@ -26,12 +38,12 @@ export default function RegisterForm() {
   });
 
   return (
-    <div>
-      <h1>Register</h1>
+    <FormContainer>
+      <h5>Register</h5>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
-          <input
+          <Input
+            label="Email"
             type="email"
             name="email"
             id="email"
@@ -44,8 +56,8 @@ export default function RegisterForm() {
           )}
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
+          <Input
+            label="Password"
             type="password"
             name="password"
             id="password"
@@ -58,8 +70,8 @@ export default function RegisterForm() {
           )}
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
+          <Input
+            label="Comfirm Password"
             type="password"
             name="confirmPassword"
             id="confirmPassword"
@@ -73,6 +85,6 @@ export default function RegisterForm() {
         </div>
         <button type="submit">Register</button>
       </form>
-    </div>
+    </FormContainer>
   );
 }
