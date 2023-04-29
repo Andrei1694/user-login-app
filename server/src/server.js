@@ -2,12 +2,15 @@ const path = require('path')
 require("dotenv").config({ path: path.resolve(__dirname, './', '.env') });
 require('./utils/mongoose')
 const http = require('http')
+
 const app = require('./app');
+
 const { mongoConnect } = require('./utils/mongoose');
+
 const PORT = process.env.PORT || 3000
+
 const server = http.createServer(app)
-console.log("===========")
-console.log(process.env.PORT)
+
 async function startServer() {
     await mongoConnect();
 
