@@ -3,6 +3,6 @@ const userRouter = require('./users.routes')
 
 const api = express.Router()
 
-api.use(userRouter)
+api.use('/users', userRouter)
 
 module.exports = api

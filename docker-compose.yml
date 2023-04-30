@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "4000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydb
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "5000:27017"
+    volumes:
+      - ./data:/data/db

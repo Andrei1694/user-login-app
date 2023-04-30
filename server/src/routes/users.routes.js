@@ -3,18 +3,18 @@ const auth = require('../utils/auth')
 const { logoutAll, logoutUser, loginUser, registerUser, updateUser, getProfile, deleteUser } = require('../controllers/user.controller')
 const userRouter = express.Router()
 
-userRouter.post('/users', registerUser)
+userRouter.post('', registerUser)
 
-userRouter.post('/users/login', loginUser)
+userRouter.post('/login', loginUser)
 
-userRouter.post('/users/logout', auth, logoutUser)
+userRouter.post('/logout', auth, logoutUser)
 
-userRouter.post('/users/logoutAll', auth, logoutAll)
+userRouter.post('/logoutAll', auth, logoutAll)
 
-userRouter.get('/users/me', auth, getProfile)
+userRouter.get('/me', auth, getProfile)
 
-userRouter.patch('/users/me', auth, updateUser)
+userRouter.patch('/me', auth, updateUser)
 
-userRouter.delete('/users/me', auth, deleteUser)
+userRouter.delete('/me', auth, deleteUser)
 
 module.exports = userRouter
