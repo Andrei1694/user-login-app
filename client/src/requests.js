@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:3000"
+const URL = "http://localhost:4000/v1"
 
 export async function registerUser(email, password, name) {
     try {
