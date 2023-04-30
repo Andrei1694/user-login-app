@@ -8,5 +8,4 @@ RUN npm install
 
 USER node
 
-CMD ["npm", "run", "dev"]
-
+CMD [ "sh", "-c", "sleep 10 && npm start" ]
