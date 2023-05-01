@@ -8,6 +8,7 @@ import WeatherPage from "./pages/weather/Weather.page";
 import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { getMyProfileRequest } from "./requests";
+import ProtectedLayout from "./pages/ProtectedLayout";
 
 function App() {
   const { setUser } = useContext(UserContext);
@@ -32,7 +33,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
         </Route>
-        <Route element={<Layout requireAuth />}>
+        <Route element={<ProtectedLayout />}>
           <Route path="/weather" element={<WeatherPage />} />
         </Route>
       </Routes>
