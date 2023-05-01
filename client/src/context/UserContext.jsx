@@ -37,7 +37,8 @@ const UserProvider = ({ children }) => {
       navigate("/");
     } catch (error) {
       setIsLoading(false);
-      setError(error.response.data.message);
+      // setError(error?.response?.data?.message);
+      console.log(error);
     }
   };
 
