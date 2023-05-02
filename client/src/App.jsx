@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { getMyProfileRequest } from "./requests";
 import ProtectedLayout from "./pages/ProtectedLayout";
+import WeatherProvider from "./context/WeatherContext";
 
 function App() {
   const { setUser } = useContext(UserContext);
@@ -34,7 +35,14 @@ function App() {
           <Route path="login" element={<LoginPage />} />
         </Route>
         <Route element={<ProtectedLayout />}>
-          <Route path="/weather" element={<WeatherPage />} />
+          <Route
+            path="/weather"
+            element={
+              <WeatherProvider>
+                <WeatherPage />
+              </WeatherProvider>
+            }
+          />
         </Route>
       </Routes>
     );

@@ -41,3 +41,13 @@ export async function getMyProfileRequest(token) {
         console.log(error)
     }
 }
+
+export async function getCurrentWeatherRequest() {
+    try {
+        const response = await axios.get(`${URL}/weather`)
+        return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}

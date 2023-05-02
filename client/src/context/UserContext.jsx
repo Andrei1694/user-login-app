@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+
   const handleRegister = async (values) => {
     const { email, password, name } = values;
     setIsLoading(true);
