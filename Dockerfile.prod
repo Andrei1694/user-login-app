@@ -1,0 +1,10 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+COPY . .
+RUN npm install --prefix client 
+RUN npm run build --prefix client
+RUN npm install --prefix server 
+USER node
+
+CMD npm run cluster --prefix server
