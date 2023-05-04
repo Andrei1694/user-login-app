@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, RouterProvider, Routes } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./pages/login/Login.page";
 import HomePage from "./pages/Home";
@@ -27,27 +27,8 @@ function App() {
     };
     checkUser();
   }, [cookies.token]);
-  function renderRoutes() {
-    return (
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-        </Route>
-        <Route element={<ProtectedLayout />}>
-          <Route
-            path="/weather"
-            element={
-              <WeatherProvider>
-                <WeatherPage />
-              </WeatherProvider>
-            }
-          />
-        </Route>
-      </Routes>
-    );
-  }
-  return <>{renderRoutes()}</>;
+
+  return <></>;
 }
 
 export default App;
