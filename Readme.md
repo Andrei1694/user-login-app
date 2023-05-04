@@ -7,6 +7,8 @@
 - npm install in client and server folders just to be sure
   From the root project
 
+From the root project
+
 ```
 docker-compose up --build
 ```
