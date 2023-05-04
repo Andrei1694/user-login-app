@@ -2,6 +2,7 @@ FROM node:lts-alpine
 
 WORKDIR /app
 COPY . .
+RUN npm install
 RUN npm install --prefix client 
 RUN npm run build --prefix client
 RUN npm install --prefix server 
