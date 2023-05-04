@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Start the application with the production build
-CMD [ "npm", "run", "dev", "--host" ]
+CMD [ "npm", "run", "start", "--host" ]
